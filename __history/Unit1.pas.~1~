@@ -1,0 +1,44 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfmMainLogic = class(TForm)
+    memoStringOutput: TMemo;
+    memoStringFromUser: TMemo;
+    Edit1: TEdit;
+    procedure edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmMainLogic: TfmMainLogic;
+Var
+  UserString: string[100];
+implementation
+
+{$R *.dfm}
+
+procedure TfmMainLogic.edtStringFromUserKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  i: Integer;
+begin
+  UserString := memoStringfromUser.Lines[0];
+  if (Key = Chr(VK_BACK)) then
+    ShowMessage('НЕльзя использовать BackSpace');
+  //edit1.KeyPress
+
+
+
+  // lblOutputString.Caption := lblOutputString.Caption + edtStringFromUser.Text;
+end;
+
+end.

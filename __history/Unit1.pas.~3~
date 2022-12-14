@@ -1,0 +1,85 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfmMainLogic = class(TForm)
+    memoStringOutput: TMemo;
+    edtStringFromUser: TEdit;
+    procedure edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
+    procedure edtStringFromUserEnter(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmMainLogic: TfmMainLogic;
+Var
+  UserString: string;
+  RandomString: String;
+implementation
+
+{$R *.dfm}
+
+procedure TfmMainLogic.edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
+var
+  i: Integer;
+begin
+  if not (Key in ['a'..'z', 'A'..'Z' ,#13]) then
+    Key := #0;
+  if (Key = #13) then
+  begin
+    ShowMessage('WORKK!!!');
+    if (Length(UserString M)) then
+
+    i := 1;
+    while (i < Length(UserString)) do
+    begin
+      if (UserString[i] <> RandomString[i]) then
+        Insert(UserString[i], RandomString, i);
+
+      if (Length(UserString) >= 60) then
+      begin
+        ShowMessage('Игра проиграна. Попробуйте ещё');
+        // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
+      end;
+      Inc(i);
+
+      memoStringOutput.Lines[0] := UserString;
+
+    end;
+
+  end;
+
+  UserString := edtStringFromUser.Text;
+end;
+
+end.
+       procedure TfmMainLogic.memoStringOutputEnter(Sender: TObject);
+var
+  i: Integer;
+begin
+  ShowMessage('Игра проиграна. Попробуйте ещё');
+  i := 1;
+  while (i < Length(UserString)) do
+  begin
+    if (UserString[i] <> RandomString[i]) then
+      Insert(UserString[i], RandomString, i);
+
+    if (Length(UserString) >= 60) then
+    begin
+      ShowMessage('Игра проиграна. Попробуйте ещё');
+      // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    end;
+    Inc(i);
+
+    memoStringOutput.Lines[0] := UserString;
+
+  end;
+end;
