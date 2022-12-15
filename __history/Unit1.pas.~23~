@@ -22,7 +22,9 @@ var
   fmMainLogic: TfmMainLogic;
 
 Const
-  KOL_WORDS = 20;
+  KOL_WORDS = 28;
+  KOL_FILES = 8;
+
 Var
   UserString: string;
   RandomString: String;
@@ -36,6 +38,7 @@ Var
   kolElementsUserStr: Integer = 0;
   kolElementsRandomStr: INteger = 0;
   PreviousPosWord: Integer;
+  IsEndGame: Boolean;
 
 implementation
 
@@ -43,7 +46,7 @@ implementation
 
 Function RandomizeWord(Kol: Integer): String;
 Var
-  f1, f2, f3, f4, f5, f6, f7: TextFile;
+  f1, f2, f3, f4, f5, f6, f7, f8: TextFile;
   i: Integer;
   PosInString: Integer;
   Word: string;
@@ -55,6 +58,7 @@ begin
   AssignFile(f5, 'D:\БГУИР\опи\Blind typing trainer\Words\5symbols.txt');
   AssignFile(f6, 'D:\БГУИР\опи\Blind typing trainer\Words\6symbols.txt');
   AssignFile(f7, 'D:\БГУИР\опи\Blind typing trainer\Words\7symbols.txt');
+  AssignFile(f8, 'D:\БГУИР\опи\Blind typing trainer\Words\8symbols.txt');
 
   Reset(f1);
   Reset(f2);
@@ -63,10 +67,11 @@ begin
   Reset(f5);
   Reset(f6);
   Reset(f7);
+  Reset(f8);
 
   i := 0;
   Randomize();
-
+  Kol := Random(KOL_FILES) + 1;
 
   case (Kol) of
     1:
@@ -180,21 +185,40 @@ begin
       RandomizeWord := Word;
       PreviousPosWord := PosInString;
     end;
+
+    8:
+    begin
+      repeat
+        PosInString := Random(KOL_WORDS);
+      until (PosInString <> PreviousPosWord);
+
+      while ((i < PosInString) and (not EOF(f8))) do
+      begin
+        Readln(f8, word);
+        Inc(i);
+      end;
+
+      RandomizeWord := Word;
+      PreviousPosWord := PosInString;
+    end;
   end;
 
 end;
 
-Function RandomizeString(var MaxKol: Integer): String;
+Function RandomizeString(Const MaxKolEl: Integer): String;
 Var
-  f1, f2, f3, f4, f5, f6, f7: TextFile;
+  f1, f2, f3, f4, f5, f6, f7, f8: TextFile;
   S, Word: string;
   PreviousPos: Integer;
   PosFile, KolElements: Integer;
   PosInString, i: Integer;
+  MaxKol: Integer;
+  PreviousWord: String;
 
 begin
   PreviousPos := -1;
   Randomize;
+  MaxKol := MaxKolEl;
 
   AssignFile(f1, 'D:\БГУИР\опи\Blind typing trainer\Words\1symbol.txt');
   AssignFile(f2, 'D:\БГУИР\опи\Blind typing trainer\Words\2symbols.txt');
@@ -203,6 +227,7 @@ begin
   AssignFile(f5, 'D:\БГУИР\опи\Blind typing trainer\Words\5symbols.txt');
   AssignFile(f6, 'D:\БГУИР\опи\Blind typing trainer\Words\6symbols.txt');
   AssignFile(f7, 'D:\БГУИР\опи\Blind typing trainer\Words\7symbols.txt');
+  AssignFile(f8, 'D:\БГУИР\опи\Blind typing trainer\Words\8symbols.txt');
 
   Reset(f1);
   Reset(f2);
@@ -211,28 +236,31 @@ begin
   Reset(f5);
   Reset(f6);
   Reset(f7);
+  Reset(f8);
 
   while (MaxKol > 0) do
   begin
     i := 0;
     Randomize();
     if (MaxKol > 7) then
-      PosFile := Random(7) + 1
+      PosFile := Random(KOL_FILES) + 1
     else
-      PosFile := MaxKol;
+      PosFile := MaxKol - 1;
 
     case (PosFile) of
       1:
       begin
         repeat
+          Randomize();
           PosInString := Random(KOL_WORDS);
-        until (PosInString <> PreviousPos);
 
-        while ((i < PosInString) and (not EOF(f1))) do
-        begin
-          Readln(f1, Word);
-          Inc(i);
-        end;
+          while ((i < PosInString) and (not EOF(f1))) do
+          begin
+            Readln(f1, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
+
         if (s <> '') then
           s := s + ' ' + word
         else
@@ -243,20 +271,21 @@ begin
           Inc(MaxKol);
         end;
 
-        PreviousPos := PosInString;
+        PreviousWord := Word;
       end;
 
       2:
       begin
         repeat
+          Randomize();
           PosInString := Random(KOL_WORDS);
-        until (PosInString <> PreviousPos);
 
-        while ((i < PosInString) and (not EOF(f2))) do
-        begin
-          Readln(f2, Word);
-          Inc(i);
-        end;
+          while ((i < PosInString) and (not EOF(f2))) do
+          begin
+            Readln(f2, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
 
         if (s <> '') then
           s := s + ' ' + word
@@ -267,20 +296,23 @@ begin
           s := s + Word;
           Inc(MaxKol);
         end;
-        PreviousPos := PosInString;
+
+        PreviousWord := Word;
       end;
 
       3:
       begin
         repeat
+          Randomize();
           PosInString := Random(KOL_WORDS);
-        until (PosInString <> PreviousPos);
 
-        while ((i < PosInString) and (not EOF(f3))) do
-        begin
-          Readln(f3, Word);
-          Inc(i);
-        end;
+          while ((i < PosInString) and (not EOF(f3))) do
+          begin
+            Readln(f3, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
+
         if (s <> '') then
           s := s + ' ' + word
         else
@@ -290,20 +322,23 @@ begin
           s := s + Word;
           Inc(MaxKol);
         end;
-        PreviousPos := PosInString;
+
+        PreviousWord := Word;
       end;
 
       4:
       begin
         repeat
+          Randomize();
           PosInString := Random(KOL_WORDS);
-        until (PosInString <> PreviousPos);
 
-        while ((i < PosInString) and (not EOF(f4))) do
-        begin
-          Readln(f3, word);
-          Inc(i);
-        end;
+          while ((i < PosInString) and (not EOF(f4))) do
+          begin
+            Readln(f4, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
+
         if (s <> '') then
           s := s + ' ' + word
         else
@@ -313,20 +348,23 @@ begin
           s := s + Word;
           Inc(MaxKol);
         end;
-        PreviousPos := PosInString;
+
+        PreviousWord := Word;
       end;
 
       5:
       begin
         repeat
+          Randomize();
           PosInString := Random(KOL_WORDS);
-        until (PosInString <> PreviousPos);
 
-        while ((i < PosInString) and (not EOF(f4))) do
-        begin
-          Readln(f5, Word);
-          Inc(i);
-        end;
+          while ((i < PosInString) and (not EOF(f5))) do
+          begin
+            Readln(f5, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
+
         if (s <> '') then
           s := s + ' ' + word
         else
@@ -336,20 +374,23 @@ begin
           s := s + Word;
           Inc(MaxKol);
         end;
-        PreviousPos := PosInString;
+
+        PreviousWord := Word;
       end;
 
       6:
       begin
         repeat
+          Randomize();
           PosInString := Random(KOL_WORDS);
-        until (PosInString <> PreviousPos);
 
-        while ((i < PosInString) and (not EOF(f6))) do
-        begin
-          Readln(f6, Word);
-          Inc(i);
-        end;
+          while ((i < PosInString) and (not EOF(f6))) do
+          begin
+            Readln(f6, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
+
         if (s <> '') then
           s := s + ' ' + word
         else
@@ -359,20 +400,23 @@ begin
           s := s + Word;
           Inc(MaxKol);
         end;
-        PreviousPos := PosInString;
+
+        PreviousWord := Word;
       end;
 
       7:
       begin
         repeat
+          Randomize();
           PosInString := Random(KOL_WORDS);
-        until (PosInString <> PreviousPos);
 
-        while ((i < PosInString) and (not EOF(f7))) do
-        begin
-          Readln(f7, word);
-          Inc(i);
-        end;
+          while ((i < PosInString) and (not EOF(f7))) do
+          begin
+            Readln(f7, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
+
         if (s <> '') then
           s := s + ' ' + word
         else
@@ -382,8 +426,36 @@ begin
           s := s + Word;
           Inc(MaxKol);
         end;
-        PreviousPos := PosInString;
+
+        PreviousWord := Word;
       end;
+
+      8:
+      begin
+        repeat
+          Randomize();
+          PosInString := Random(KOL_WORDS);
+
+          while ((i < PosInString) and (not EOF(f8))) do
+          begin
+            Readln(f8, Word);
+            Inc(i);
+          end;
+        until Word <> PreviousWord;
+
+        if (s <> '') then
+          s := s + ' ' + word
+        else
+        begin
+          if (Word[1] in ['a'..'z']) then
+            Word[1] := Chr(ord(Word[1]) - 32);
+          s := s + Word;
+          Inc(MaxKol);
+        end;
+
+        PreviousWord := Word;
+      end;
+
     end;
 
     MaxKol := MaxKol - PosFile - 1;;
@@ -395,40 +467,51 @@ procedure TfmMainLogic.edtStringFromUserKeyPress(Sender: TObject; var Key: Char)
 var
   i: Integer;
   KolElInStr: Integer;
+  isNewString: Boolean;
 begin
+  isNewString := False;
   if not (Key in ['a'..'z', 'A'..'Z' ,#13, '1', '3', ' ']) then
     Key := #0;
 
   UserString := edtStringFromUser.Text;
-  // MainLengthUserStr := Length(UserString);
-  SetLength(UserString, Length(RandomString));
+  MainLengthUserStr := Length(UserString);
 
   if (UserString = '13') then
   begin
     ShowMessage('Игра окончена');
+
+    IsEndGame := True;
     edtStringFromUser.Clear;
     memoStringOutput.Clear;
   end;
+  SetLength(UserString, Length(RandomString));
 
-  if (Key = #13) then
+  if ((Key = #13) and (not IsEndGame)) then
   begin
+    OutputString := '';
 
     if (UserString = RandomString) then
     begin
       MaxLength := MaxLength - 2;
       RandomString := RandomizeString(MaxLength);
+
+      isNewString := True;
+      OutputString := RandomString;
+      memoStringOutput.Clear;
+      memoStringOutput.Lines[0] := RandomString;
+      edtStringFromUser.Clear;
     end;
 
-    if (Length(UserString) <= Length(RandomString)) then
-      MaxLength := Length(RandomString)
-    else
-      MaxLength := Length(UserString);
+    // if (Length(UserString) <= Length(RandomString)) then
+      // MaxLength := Length(RandomString)
+    // else
+      // MaxLength := Length(UserString);
 
-    PosUserStr := 0;
-    PosRandomStr := 0;
+    PosUserStr := 1;
+    PosRandomStr := 1;
 
     i := 1;
-    while (i <= Length(RandomString)) do
+    while ((i <= Length(RandomString)) and (not IsNewString)) do
     begin
       kolElementsUserStr := 0;
       kolElementsRandomStr := 0;
@@ -438,7 +521,6 @@ begin
         Inc(PosUserStr);
         Inc(kolElementsUserStr);
       end;
-
 
       while ((RandomString[PosRandomStr] <> ' ') and (PosRandomStr <= Length(RandomString))) do
       begin
@@ -451,47 +533,76 @@ begin
 
       if (UserPart = RandomPart) then
       begin
-        OutputString := OutputString + ' ' + RandomizeWord(Length(UserPart));
+        if (OutputString <> '') then
+          OutputString := OutputString + RandomizeWord(Length(UserPart)) + ' '
+        else
+          OutputString := RandomizeWord(Length(UserPart)) + ' ';//////////////////
       end
       else
       begin
-
+        /////////////////////////////////////////////////////////////////////////
+        SetLength(UserPart, Length(RandomPart));
         j := 1;
         while ((j <= Length(RandomPart)) and (UserPart[i] <> ' ')) do
         begin
           if (UserPart[j] <> RandomPart[j]) then
           begin
-            for k := 1 to TempForDuplicate div 2 do
+            for k := 0 to TempForDuplicate div 2 do
               OutputString := OutputString + RandomPart[j];
-          end;
+          end
+          else
             OutputString := OutputString + RandomPart[j];
           Inc(j);
         end;
+        OutputString := OutputString + ' ';
+
       end;
+      memoStringOutput.Lines[0] := OutputString;
 
       Inc(PosRandomStr);
       Inc(PosUserStr);
       i := PosRandomStr;
 
     end;
-    // memoStringOutput.Clear;
+
+    i := 1;
+    while (i < Length(OutputString)) do
+    begin
+      if ((OutputString[i] = ' ') and (OutputString[i + 1] = ' ')) then
+      begin
+        Delete(OutputString, i, 1);
+        Dec(i);
+      end;
+    end;
+
+    memoStringOutput.Lines[0] := '';
     memoStringOutput.Lines[0] := OutputString;
+    edtStringFromUser.Clear;
+    MaxLength := Length(OutputString);
+    RandomString := OutputString;
   end;
-   // memoStringOutput.Clear;
-   memoStringOutput.Lines[0] := OutputString;
 
 
   if (Length(UserString) >= 60) then
   begin
     ShowMessage('Игра проиграна. Попробуйте ещё');
     // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
   end;
   Inc(i);
 
   if (MaxLength = 0) then
   begin
     TempForDuplicate := TempForDuplicate * 2;
-    // рандом новой строки
+    ShowMessage('Следующий раунд!');
+
+    MaxLength := 20;
+    RandomString :=  RandomizeString(MaxLength);
+
+    memoStringOutput.Clear;
+    memoStringOutput.Lines[0] := RandomString;
+    fmMainLogic.Hide;
+    fmMainLogic.Show;
   end;
 
 end;
@@ -500,7 +611,6 @@ procedure TfmMainLogic.FormCreate(Sender: TObject);
 begin
   RandomString := RandomizeString(MaxLength);
   memoStringOutput.Lines[0] := RandomString;
-
 end;
 
 end.

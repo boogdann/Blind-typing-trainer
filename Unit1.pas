@@ -536,7 +536,7 @@ begin
         if (OutputString <> '') then
           OutputString := OutputString + RandomizeWord(Length(UserPart)) + ' '
         else
-          OutputString := RandomizeWord(Length(UserPart));//////////////////
+          OutputString := RandomizeWord(Length(UserPart)) + ' ';//////////////////
       end
       else
       begin
@@ -564,17 +564,36 @@ begin
       i := PosRandomStr;
 
     end;
+
+    // попробовать без этого
+    ///////////////////////////////////////////////////////////////////////////
+    i := 1;
+    while (i < Length(OutputString)) do
+    begin
+      if ((OutputString[i] = ' ') and (OutputString[i + 1] = ' ')) then
+      begin
+        Delete(OutputString, i, 1);
+        Dec(i);
+      end;
+      Inc(i);
+    end;
+    ////////////////////////////////////////////////////////////////////////////
+
     memoStringOutput.Lines[0] := '';
     memoStringOutput.Lines[0] := OutputString;
     edtStringFromUser.Clear;
     MaxLength := Length(OutputString);
+
+    RandomString := OutputString;
   end;
+
 
   if (Length(UserString) >= 60) then
   begin
-    ShowMessage('Игра проиграна. Попробуйте ещё');
+    ShowMessage('Игра проиграна. Попробуйте ещё(я не делал дальше), хотя возможно и будет работать');
     // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
+    fmMainLogic.Hide;
+    fmMainLogic.Show;
   end;
   Inc(i);
 
