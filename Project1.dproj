@@ -102,6 +102,14 @@
             <Form>fmMainLogic</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Unit2.pas">
+            <Form>fmMainMenu</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Unit3.pas">
+            <Form>fmRules</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

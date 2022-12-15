@@ -1,0 +1,16 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  Unit1 in 'Unit1.pas' {fmMainLogic},
+  Unit2 in 'Unit2.pas' {fmName};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfmMainLogic, fmMainLogic);
+  Application.CreateForm(TfmName, fmName);
+  Application.Run;
+end.
