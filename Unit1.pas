@@ -261,10 +261,12 @@ begin
       repeat
         Randomize();
         PosFile := Random(KOL_FILES) + 1;
-      until not ((PosFile <> PreviousFile) and (PreviousFile = 1));
+      until not ((PosFile = PreviousFile) and (PreviousFile = 1));
     end
     else
       PosFile := MaxKol - 1;
+
+    PreviousFile := PosFile;
     if (PosFile = 0) then
     begin
       S := S + 's';
@@ -627,6 +629,13 @@ begin
     i := 1;
     while (i < Length(OutputString)) do
     begin
+    if ((OutputString[1] = ' ')) then
+      begin
+        Delete(OutputString, 1, 1);
+        Dec(i);
+      end;
+
+
       if ((OutputString[i] = ' ') and (OutputString[i + 1] = ' ')) then
       begin
         Delete(OutputString, i, 1);
