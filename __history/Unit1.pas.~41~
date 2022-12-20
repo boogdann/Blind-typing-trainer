@@ -10,6 +10,8 @@ type
   TfmMainLogic = class(TForm)
     memoStringOutput: TMemo;
     edtStringFromUser: TEdit;
+    lblNameRound: TLabel;
+    lblRound: TLabel;
     procedure edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
   private
@@ -24,18 +26,20 @@ var
 Const
   KOL_WORDS = 28;
   KOL_FILES = 8;
-  PATH_F1 = 'D:\БГУИР\опи\Blind typing trainer\Words\1symbol.txt';
-  PATH_F2 = 'D:\БГУИР\опи\Blind typing trainer\Words\2symbols.txt';
-  PATH_F3 = 'D:\БГУИР\опи\Blind typing trainer\Words\3symbols.txt';
-  PATH_F4 = 'D:\БГУИР\опи\Blind typing trainer\Words\4symbols.txt';
-  PATH_F5 = 'D:\БГУИР\опи\Blind typing trainer\Words\5symbols.txt';
-  PATH_F6 = 'D:\БГУИР\опи\Blind typing trainer\Words\6symbols.txt';
-  PATH_F7 = 'D:\БГУИР\опи\Blind typing trainer\Words\7symbols.txt';
-  PATH_F8 = 'D:\БГУИР\опи\Blind typing trainer\Words\8symbols.txt';
+  PATH_F1 = '1symbol.txt';
+  PATH_F2 = '2symbols.txt';
+  PATH_F3 = '3symbols.txt';
+  PATH_F4 = '4symbols.txt';
+  PATH_F5 = '5symbols.txt';
+  PATH_F6 = '6symbols.txt';
+  PATH_F7 = '7symbols.txt';
+  PATH_F8 = '8symbols.txt';
+
+  TempForDecrease = 2;
 
 Var
   UserString: string;
-  RandomString: String;
+  RandomString: string;
   MaxLength: Integer = 20;
   TempForDuplicate: Integer = 2;
   PosUserStr, PosRandomStr, j, k: Integer;
@@ -44,10 +48,11 @@ Var
   MinLength: Integer;
   MainLengthUserStr: Integer;
   kolElementsUserStr: Integer = 0;
-  kolElementsRandomStr: INteger = 0;
+  kolElementsRandomStr: Integer = 0;
   PreviousPosWord: Integer;
   IsEndGame: Boolean;
   f1, f2, f3, f4, f5, f6, f7, f8: TextFile;
+  Round: Integer;
 
 implementation
 
@@ -63,15 +68,18 @@ begin
   i := 0;
   Randomize();
 ///////////////////////////////////// возможны баги
-  if (Kol > MaxLength) then
-    Kol := Random(KOL_FILES) + 1;
+
+  Kol := Random(KOL_FILES) + 1;
+
+  if (Kol = -1) then
+    Kol := MaxLength;
 
   case (Kol) of
     1:
     begin
-      repeat
-        PosInString := Random(KOL_WORDS);
-      until (PosInString <> PreviousPosWord);
+      // repeat
+      PosInString := Random(KOL_WORDS);
+      // until (PosInString <> PreviousPosWord);
 
       Reset(f1);
       i := 0;
@@ -221,13 +229,13 @@ Var
   PosInString, i: Integer;
   MaxKol: Integer;
   PreviousWord: String;
-
+  PreviousFile: Integer;
 begin
 
 
   Randomize;
   MaxKol := MaxKolEl;
-
+  PreviousFile := -1;
 //  AssignFile(f1, 'D:\БГУИР\опи\Blind typing trainer\Words\1symbol.txt');
 //  AssignFile(f2, 'D:\БГУИР\опи\Blind typing trainer\Words\2symbols.txt');
 //  AssignFile(f3, 'D:\БГУИР\опи\Blind typing trainer\Words\3symbols.txt');
@@ -254,9 +262,16 @@ begin
     i := 0;
     Randomize();
     if (MaxKol > KOL_FILES) then
-      PosFile := Random(KOL_FILES) + 1
+    begin
+      repeat
+        Randomize();
+        PosFile := Random(KOL_FILES) + 1;
+      until not ((PosFile = PreviousFile) and (PreviousFile = 1));
+    end
     else
       PosFile := MaxKol - 1;
+
+    PreviousFile := PosFile;
     if (PosFile = 0) then
     begin
       S := S + 's';
@@ -532,7 +547,9 @@ begin
 
     if (UserString = RandomString) then
     begin
-      MaxLength := MaxLength - 2;
+
+
+      MaxLength := MaxLength - TempForDecrease;
       RandomString := RandomizeString(MaxLength);
 
       isNewString := True;
@@ -575,7 +592,10 @@ begin
       begin
         if (MaxLength <= KOL_FILES) then
         begin
-          OutputString := RandomizeString(MaxLength)
+
+
+          MaxLength := MaxLength - TempForDecrease;
+          OutputString := RandomizeWord(-1)
         end
         else
         begin
@@ -618,6 +638,13 @@ begin
     i := 1;
     while (i < Length(OutputString)) do
     begin
+    if ((OutputString[1] = ' ')) then
+      begin
+        Delete(OutputString, 1, 1);
+        Dec(i);
+      end;
+
+
       if ((OutputString[i] = ' ') and (OutputString[i + 1] = ' ')) then
       begin
         Delete(OutputString, i, 1);
@@ -637,10 +664,14 @@ begin
 
   if (Length(UserString) >= 60) then
   begin
-    ShowMessage('Игра проиграна. Попробуйте ещё(я не делал дальше), хотя возможно и будет работать');
+    ShowMessage('Игра проиграна. Попробуйте ещё');
     // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    Round := 0;
+    MaxLength := 20;
+    TempForDuplicate := 2;
     fmMainLogic.Hide;
     fmMainLogic.Show;
+
   end;
   Inc(i);
 
@@ -649,11 +680,16 @@ begin
     TempForDuplicate := TempForDuplicate * 2;
     ShowMessage('Следующий раунд!');
 
+
     MaxLength := 20;
     RandomString :=  RandomizeString(MaxLength);
 
+    Inc(Round);
+    lblRound.Caption := IntToStr(Round);
     memoStringOutput.Clear;
     memoStringOutput.Lines[0] := RandomString;
+
+    UserString := '';
     fmMainLogic.Hide;
     fmMainLogic.Show;
   end;
@@ -683,11 +719,10 @@ begin
   RandomString := RandomizeString(MaxLength);
   memoStringOutput.Lines[0] := RandomString;
 
+  Inc(Round);
+  lblRound.Caption := IntToStr(Round);
 end;
 
 end.
-
-
-
 
 

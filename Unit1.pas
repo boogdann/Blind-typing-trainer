@@ -10,6 +10,8 @@ type
   TfmMainLogic = class(TForm)
     memoStringOutput: TMemo;
     edtStringFromUser: TEdit;
+    lblNameRound: TLabel;
+    lblRound: TLabel;
     procedure edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
   private
@@ -24,19 +26,20 @@ var
 Const
   KOL_WORDS = 28;
   KOL_FILES = 8;
-  PATH_F1 = 'D:\БГУИР\опи\Blind typing trainer\Words\1symbol.txt';
-  PATH_F2 = 'D:\БГУИР\опи\Blind typing trainer\Words\2symbols.txt';
-  PATH_F3 = 'D:\БГУИР\опи\Blind typing trainer\Words\3symbols.txt';
-  PATH_F4 = 'D:\БГУИР\опи\Blind typing trainer\Words\4symbols.txt';
-  PATH_F5 = 'D:\БГУИР\опи\Blind typing trainer\Words\5symbols.txt';
-  PATH_F6 = 'D:\БГУИР\опи\Blind typing trainer\Words\6symbols.txt';
-  PATH_F7 = 'D:\БГУИР\опи\Blind typing trainer\Words\7symbols.txt';
-  PATH_F8 = 'D:\БГУИР\опи\Blind typing trainer\Words\8symbols.txt';
+  PATH_F1 = '1symbol.txt';
+  PATH_F2 = '2symbols.txt';
+  PATH_F3 = '3symbols.txt';
+  PATH_F4 = '4symbols.txt';
+  PATH_F5 = '5symbols.txt';
+  PATH_F6 = '6symbols.txt';
+  PATH_F7 = '7symbols.txt';
+  PATH_F8 = '8symbols.txt';
+
   TempForDecrease = 2;
 
 Var
   UserString: string;
-  RandomString: String;
+  RandomString: string;
   MaxLength: Integer = 20;
   TempForDuplicate: Integer = 2;
   PosUserStr, PosRandomStr, j, k: Integer;
@@ -45,10 +48,11 @@ Var
   MinLength: Integer;
   MainLengthUserStr: Integer;
   kolElementsUserStr: Integer = 0;
-  kolElementsRandomStr: INteger = 0;
+  kolElementsRandomStr: Integer = 0;
   PreviousPosWord: Integer;
   IsEndGame: Boolean;
   f1, f2, f3, f4, f5, f6, f7, f8: TextFile;
+  Round: Integer;
 
 implementation
 
@@ -662,11 +666,12 @@ begin
   begin
     ShowMessage('Игра проиграна. Попробуйте ещё');
     // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
+    Round := 0;
     MaxLength := 20;
     TempForDuplicate := 2;
     fmMainLogic.Hide;
     fmMainLogic.Show;
+
   end;
   Inc(i);
 
@@ -675,11 +680,15 @@ begin
     TempForDuplicate := TempForDuplicate * 2;
     ShowMessage('Следующий раунд!');
 
+
     MaxLength := 20;
     RandomString :=  RandomizeString(MaxLength);
 
+    Inc(Round);
+    lblRound.Caption := IntToStr(Round);
     memoStringOutput.Clear;
     memoStringOutput.Lines[0] := RandomString;
+
     UserString := '';
     fmMainLogic.Hide;
     fmMainLogic.Show;
@@ -710,6 +719,8 @@ begin
   RandomString := RandomizeString(MaxLength);
   memoStringOutput.Lines[0] := RandomString;
 
+  Inc(Round);
+  lblRound.Caption := IntToStr(Round);
 end;
 
 end.

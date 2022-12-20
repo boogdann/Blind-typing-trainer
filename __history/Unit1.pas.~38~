@@ -32,6 +32,7 @@ Const
   PATH_F6 = 'D:\БГУИР\опи\Blind typing trainer\Words\6symbols.txt';
   PATH_F7 = 'D:\БГУИР\опи\Blind typing trainer\Words\7symbols.txt';
   PATH_F8 = 'D:\БГУИР\опи\Blind typing trainer\Words\8symbols.txt';
+  TempForDecrease = 2;
 
 Var
   UserString: string;
@@ -261,10 +262,12 @@ begin
       repeat
         Randomize();
         PosFile := Random(KOL_FILES) + 1;
-      until not ((PosFile <> PreviousFile) and (PreviousFile = 1));
+      until not ((PosFile = PreviousFile) and (PreviousFile = 1));
     end
     else
       PosFile := MaxKol - 1;
+
+    PreviousFile := PosFile;
     if (PosFile = 0) then
     begin
       S := S + 's';
@@ -540,7 +543,9 @@ begin
 
     if (UserString = RandomString) then
     begin
-      MaxLength := MaxLength - 2;
+
+
+      MaxLength := MaxLength - TempForDecrease;
       RandomString := RandomizeString(MaxLength);
 
       isNewString := True;
@@ -583,7 +588,9 @@ begin
       begin
         if (MaxLength <= KOL_FILES) then
         begin
-          MaxLength := MaxLength - 2;
+
+
+          MaxLength := MaxLength - TempForDecrease;
           OutputString := RandomizeWord(-1)
         end
         else
@@ -627,6 +634,13 @@ begin
     i := 1;
     while (i < Length(OutputString)) do
     begin
+    if ((OutputString[1] = ' ')) then
+      begin
+        Delete(OutputString, 1, 1);
+        Dec(i);
+      end;
+
+
       if ((OutputString[i] = ' ') and (OutputString[i + 1] = ' ')) then
       begin
         Delete(OutputString, i, 1);
@@ -648,6 +662,9 @@ begin
   begin
     ShowMessage('Игра проиграна. Попробуйте ещё');
     // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+    MaxLength := 20;
+    TempForDuplicate := 2;
     fmMainLogic.Hide;
     fmMainLogic.Show;
   end;
@@ -663,6 +680,7 @@ begin
 
     memoStringOutput.Clear;
     memoStringOutput.Lines[0] := RandomString;
+    UserString := '';
     fmMainLogic.Hide;
     fmMainLogic.Show;
   end;
@@ -695,8 +713,5 @@ begin
 end;
 
 end.
-
-
-
 
 

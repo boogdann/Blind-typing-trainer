@@ -10,7 +10,8 @@ type
   TfmMainLogic = class(TForm)
     memoStringOutput: TMemo;
     edtStringFromUser: TEdit;
-    Label1: TLabel;
+    lblNameRound: TLabel;
+    lblRound: TLabel;
     procedure edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
   private
@@ -25,14 +26,14 @@ var
 Const
   KOL_WORDS = 28;
   KOL_FILES = 8;
-  PATH_F1 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\1symbol.txt';
-  PATH_F2 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\2symbols.txt';
-  PATH_F3 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\3symbols.txt';
-  PATH_F4 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\4symbols.txt';
-  PATH_F5 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\5symbols.txt';
-  PATH_F6 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\6symbols.txt';
-  PATH_F7 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\7symbols.txt';
-  PATH_F8 = 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\8symbols.txt';
+  PATH_F1 = '1symbol.txt';
+  PATH_F2 = '2symbols.txt';
+  PATH_F3 = '3symbols.txt';
+  PATH_F4 = '4symbols.txt';
+  PATH_F5 = '5symbols.txt';
+  PATH_F6 = '6symbols.txt';
+  PATH_F7 = '7symbols.txt';
+  PATH_F8 = '8symbols.txt';
   TempForDecrease = 2;
 
 Var
@@ -65,7 +66,7 @@ begin
 
   i := 0;
   Randomize();
-///////////////////////////////////// РІРѕР·РјРѕР¶РЅС‹ Р±Р°РіРё
+///////////////////////////////////// возможны баги
 
   Kol := Random(KOL_FILES) + 1;
 
@@ -234,14 +235,14 @@ begin
   Randomize;
   MaxKol := MaxKolEl;
   PreviousFile := -1;
-//  AssignFile(f1, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\1symbol.txt');
-//  AssignFile(f2, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\2symbols.txt');
-//  AssignFile(f3, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\3symbols.txt');
-//  AssignFile(f4, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\4symbols.txt');
-//  AssignFile(f5, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\5symbols.txt');
-//  AssignFile(f6, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\6symbols.txt');
-//  AssignFile(f7, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\7symbols.txt');
-//  AssignFile(f8, 'D:\Р‘Р“РЈРР \РѕРїРё\Blind typing trainer\Words\8symbols.txt');
+//  AssignFile(f1, 'D:\БГУИР\опи\Blind typing trainer\Words\1symbol.txt');
+//  AssignFile(f2, 'D:\БГУИР\опи\Blind typing trainer\Words\2symbols.txt');
+//  AssignFile(f3, 'D:\БГУИР\опи\Blind typing trainer\Words\3symbols.txt');
+//  AssignFile(f4, 'D:\БГУИР\опи\Blind typing trainer\Words\4symbols.txt');
+//  AssignFile(f5, 'D:\БГУИР\опи\Blind typing trainer\Words\5symbols.txt');
+//  AssignFile(f6, 'D:\БГУИР\опи\Blind typing trainer\Words\6symbols.txt');
+//  AssignFile(f7, 'D:\БГУИР\опи\Blind typing trainer\Words\7symbols.txt');
+//  AssignFile(f8, 'D:\БГУИР\опи\Blind typing trainer\Words\8symbols.txt');
 //
 //  Reset(f1);
 //  Reset(f2);
@@ -531,7 +532,7 @@ begin
 
   if (UserString = '13') then
   begin
-    ShowMessage('РРіСЂР° РѕРєРѕРЅС‡РµРЅР°');
+    ShowMessage('Игра окончена');
 
     IsEndGame := True;
     edtStringFromUser.Clear;
@@ -631,7 +632,7 @@ begin
 
     end;
 
-    // РїРѕРїСЂРѕР±РѕРІР°С‚СЊ Р±РµР· СЌС‚РѕРіРѕ
+    // попробовать без этого
     ///////////////////////////////////////////////////////////////////////////
     i := 1;
     while (i < Length(OutputString)) do
@@ -662,26 +663,31 @@ begin
 
   if (Length(UserString) >= 60) then
   begin
-    ShowMessage('РРіСЂР° РїСЂРѕРёРіСЂР°РЅР°. РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰С‘');
-    // РЅР°С‡Р°Р»Рѕ РёРіСЂС‹ Р·Р°РЅРѕРІРѕ !!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
+    ShowMessage('Игра проиграна. Попробуйте ещё');
+    // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    Round := 0;
     MaxLength := 20;
     TempForDuplicate := 2;
     fmMainLogic.Hide;
     fmMainLogic.Show;
+
   end;
   Inc(i);
 
   if (MaxLength = 0) then
   begin
     TempForDuplicate := TempForDuplicate * 2;
-    ShowMessage('РЎР»РµРґСѓСЋС‰РёР№ СЂР°СѓРЅРґ!');
+    ShowMessage('Следующий раунд!');
+
 
     MaxLength := 20;
     RandomString :=  RandomizeString(MaxLength);
 
+    Inc(Round);
+    lblRound.Caption := IntToStr(Round);
     memoStringOutput.Clear;
     memoStringOutput.Lines[0] := RandomString;
+
     UserString := '';
     fmMainLogic.Hide;
     fmMainLogic.Show;
@@ -712,6 +718,8 @@ begin
   RandomString := RandomizeString(MaxLength);
   memoStringOutput.Lines[0] := RandomString;
 
+  Inc(Round);
+  lblRound.Caption := IntToStr(Round);
 end;
 
 end.
