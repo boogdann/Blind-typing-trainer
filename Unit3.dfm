@@ -1,10 +1,11 @@
 object fmRules: TfmRules
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'Blind type trainer'
-  ClientHeight = 231
-  ClientWidth = 505
-  Color = clBtnFace
+  ClientHeight = 241
+  ClientWidth = 515
+  Color = clCream
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
