@@ -4,13 +4,16 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls;
 
 type
   TfmMainMenu = class(TForm)
     btnMainGame: TButton;
     Правила: TButton;
     dtnExit: TButton;
+    StatusBar1: TStatusBar;
+    ToolBar1: TToolBar;
+    Button1: TButton;
     procedure btnMainGameClick(Sender: TObject);
     procedure ПравилаClick(Sender: TObject);
     procedure dtnExitClick(Sender: TObject);
@@ -44,10 +47,9 @@ end;
 
 procedure TfmMainMenu.ПравилаClick(Sender: TObject);
 begin
-  fmMainLogic.Show;
+  fmRules.Show;
   fmMainMenu.Hide;
 end;
-
 
 
 end.

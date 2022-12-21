@@ -24,7 +24,7 @@ var
   fmMainLogic: TfmMainLogic;
 
 Const
-  KOL_WORDS = 28;
+  KOL_WORDS = 29;
   KOL_FILES = 8;
   PATH_F1 = '1symbol.txt';
   PATH_F2 = '2symbols.txt';
