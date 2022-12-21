@@ -9,10 +9,10 @@ uses
 type
   TfmMainMenu = class(TForm)
     btnMainGame: TButton;
-    Rules: TButton;
+    Правила: TButton;
     dtnExit: TButton;
     procedure btnMainGameClick(Sender: TObject);
-    procedure RulesClick(Sender: TObject);
+    procedure ПравилаClick(Sender: TObject);
     procedure dtnExitClick(Sender: TObject);
   private
     { Private declarations }
@@ -42,7 +42,7 @@ begin
   fmMainMenu.Close;
 end;
 
-procedure TfmMainMenu.RulesClick(Sender: TObject);
+procedure TfmMainMenu.ПравилаClick(Sender: TObject);
 begin
   fmMainLogic.Show;
   fmMainMenu.Hide;

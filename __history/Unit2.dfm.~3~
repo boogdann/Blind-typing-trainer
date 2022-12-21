@@ -1,4 +1,4 @@
-object fmMainMenu: TfmMainMenu
+﻿object fmMainMenu: TfmMainMenu
   Left = 0
   Top = 0
   Caption = 'Blind typing  trainer'
@@ -22,14 +22,14 @@ object fmMainMenu: TfmMainMenu
     TabOrder = 0
     OnClick = btnMainGameClick
   end
-  object Rules: TButton
+  object Правила: TButton
     Left = 152
     Top = 224
     Width = 115
     Height = 41
-    Caption = 'Rules'
+    Caption = #1055#1088#1072#1074#1080#1083#1072
     TabOrder = 1
-    OnClick = RulesClick
+    OnClick = ПравилаClick
   end
   object dtnExit: TButton
     Left = 152
