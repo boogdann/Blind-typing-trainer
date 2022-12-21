@@ -69,7 +69,7 @@ begin
   Randomize();
 ///////////////////////////////////// возможны баги
 
-  Kol := Random(KOL_FILES) + 1;
+  // Kol := Random(KOL_FILES) + 1;
 
   if (Kol = -1) then
     Kol := MaxLength;
