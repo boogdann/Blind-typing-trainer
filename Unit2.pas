@@ -9,13 +9,21 @@ uses
 type
   TfmMainMenu = class(TForm)
     btnMainGame: TButton;
+<<<<<<< HEAD
+    btnRules: TButton;
+=======
     Rules: TButton;
+>>>>>>> 4a6fbceda96d23aefa8a29b5852da5e3abc10005
     dtnExit: TButton;
     StatusBar1: TStatusBar;
     ToolBar1: TToolBar;
     Button1: TButton;
     procedure btnMainGameClick(Sender: TObject);
+<<<<<<< HEAD
+    procedure btnRulesClick(Sender: TObject);
+=======
     procedure RulesClick(Sender: TObject);
+>>>>>>> 4a6fbceda96d23aefa8a29b5852da5e3abc10005
     procedure dtnExitClick(Sender: TObject);
   private
     { Private declarations }
@@ -45,10 +53,13 @@ begin
   fmMainMenu.Close;
 end;
 
+<<<<<<< HEAD
+procedure TfmMainMenu.btnRulesClick(Sender: TObject);
+=======
 procedure TfmMainMenu.RulesClick(Sender: TObject);
+>>>>>>> 4a6fbceda96d23aefa8a29b5852da5e3abc10005
 begin
   fmRules.Show;
-  fmMainMenu.Hide;
 end;
 
 

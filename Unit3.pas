@@ -8,6 +8,8 @@ uses
 
 type
   TfmRules = class(TForm)
+    backButton: TButton;
+    procedure backButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -21,5 +23,10 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TfmRules.backButtonClick(Sender: TObject);
+begin
+  fmRules.Hide;
+end;
 
 end.
