@@ -17,6 +17,7 @@ type
     procedure btnMainGameClick(Sender: TObject);
     procedure RulesClick(Sender: TObject);
     procedure dtnExitClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,6 +32,7 @@ implementation
 {$R *.dfm}
 Uses
   Unit1,
+  Unit4,
   Unit3;
 
 procedure TfmMainMenu.btnMainGameClick(Sender: TObject);
@@ -40,6 +42,12 @@ begin
 end;
 
 
+procedure TfmMainMenu.Button1Click(Sender: TObject);
+begin
+  fmMainMenu.Hide;
+  Form4.Show;
+end;
+
 procedure TfmMainMenu.dtnExitClick(Sender: TObject);
 begin
   fmMainMenu.Close;
@@ -47,8 +55,8 @@ end;
 
 procedure TfmMainMenu.RulesClick(Sender: TObject);
 begin
-  fmRules.Show;
   fmMainMenu.Hide;
+  fmRules.Show;
 end;
 
 

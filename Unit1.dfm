@@ -1,9 +1,10 @@
 object fmMainLogic: TfmMainLogic
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'Blind typing trainer'
-  ClientHeight = 458
-  ClientWidth = 505
+  ClientHeight = 450
+  ClientWidth = 462
   Color = clCream
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -3199,5 +3200,14 @@ object fmMainLogic: TfmMainLogic
     TabOrder = 1
     TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1089#1090#1088#1086#1082#1091
     OnKeyPress = edtStringFromUserKeyPress
+  end
+  object Button1: TButton
+    Left = 192
+    Top = 296
+    Width = 75
+    Height = 25
+    Caption = #1042#1099#1093#1086#1076
+    TabOrder = 2
+    OnClick = Button1Click
   end
 end

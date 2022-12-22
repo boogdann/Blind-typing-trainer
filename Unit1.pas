@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Unit2;
 
 type
   TfmMainLogic = class(TForm)
@@ -12,8 +13,10 @@ type
     edtStringFromUser: TEdit;
     lblNameRound: TLabel;
     lblRound: TLabel;
+    Button1: TButton;
     procedure edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -230,6 +233,7 @@ Var
   MaxKol: Integer;
   PreviousWord: String;
   PreviousFile: Integer;
+
 begin
 
 
@@ -516,6 +520,12 @@ begin
 
   SetLength(S, MaxKolEl);
   RandomizeString := S;
+end;
+
+procedure TfmMainLogic.Button1Click(Sender: TObject);
+begin
+  fmMainLogic.Close;
+  fmMainMenu.Close;
 end;
 
 procedure TfmMainLogic.edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
