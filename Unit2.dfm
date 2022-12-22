@@ -3164,6 +3164,7 @@ object fmMainMenu: TfmMainMenu
     FF0000FFFF0000FFFF0000FFFF0000E1870000C0030000C0030000C0030000FF
     FF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000}
   OldCreateOrder = False
+  Position = poDesktopCenter
   Visible = True
   PixelsPerInch = 96
   TextHeight = 13
@@ -3194,20 +3195,13 @@ object fmMainMenu: TfmMainMenu
     TabOrder = 2
     OnClick = dtnExitClick
   end
-  object StatusBar1: TStatusBar
-    Left = 0
-    Top = 441
-    Width = 452
-    Height = 19
-    Panels = <>
-  end
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
     Width = 452
     Height = 29
     Caption = 'ToolBar1'
-    TabOrder = 4
+    TabOrder = 3
   end
   object Button1: TButton
     Left = 328
@@ -3215,7 +3209,14 @@ object fmMainMenu: TfmMainMenu
     Width = 106
     Height = 26
     Caption = #1054' '#1088#1072#1079#1088#1072#1073#1086#1090#1095#1080#1082#1072#1093
-    TabOrder = 5
+    TabOrder = 4
     OnClick = Button1Click
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 441
+    Width = 452
+    Height = 19
+    Panels = <>
   end
 end

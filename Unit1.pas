@@ -14,9 +14,13 @@ type
     lblNameRound: TLabel;
     lblRound: TLabel;
     Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     procedure edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,7 +74,7 @@ begin
 
   i := 0;
   Randomize();
-///////////////////////////////////// возможны баги
+/////////////////////////////////////
 
   // Kol := Random(KOL_FILES) + 1;
 
@@ -528,6 +532,33 @@ begin
   fmMainMenu.Close;
 end;
 
+procedure TfmMainLogic.Button2Click(Sender: TObject);
+begin
+  fmMainLogic.Close;
+   fmMainMenu.Show;
+end;
+
+procedure TfmMainLogic.Button3Click(Sender: TObject);
+begin
+  edtStringFromUser.Clear;
+  Round := 0;
+  MaxLength := 20;
+  TempForDuplicate := 2;
+
+  RandomString :=  RandomizeString(MaxLength);
+  Inc(Round);
+  lblRound.Caption := IntToStr(Round);
+  memoStringOutput.Clear;
+  memoStringOutput.Lines[0] := RandomString;
+  edtStringFromUser.Clear;
+  UserString := '';
+
+  edtStringFromUser.Clear;
+  // IsEndGame := True;
+
+  edtStringFromUser.Clear;
+end;
+
 procedure TfmMainLogic.edtStringFromUserKeyPress(Sender: TObject; var Key: Char);
 var
   i: Integer;
@@ -672,16 +703,30 @@ begin
   end;
 
 
-  if (Length(UserString) >= 60) then
+  if (Length(UserString) >= 40) then
   begin
     ShowMessage('Игра проиграна. Попробуйте ещё');
     // начало игры заново !!!!!!!!!!!!!!!!!!!!!!!!!!!1
-    Round := 0;
-    MaxLength := 20;
-    TempForDuplicate := 2;
-    fmMainLogic.Hide;
-    fmMainLogic.Show;
-
+     memoStringOutput.Lines[0] := 'Начните игру заново';
+     edtStringFromUser.Clear;
+//    Round := 0;
+//    MaxLength := 20;
+//    TempForDuplicate := 2;
+//
+//    RandomString :=  RandomizeString(MaxLength);
+//
+//    Inc(Round);
+//    lblRound.Caption := IntToStr(Round);
+//    memoStringOutput.Clear;
+//    memoStringOutput.Lines[0] := RandomString;
+//    edtStringFromUser.Clear;
+//    UserString := '';
+//
+//    edtStringFromUser.Clear;
+//    // IsEndGame := True;
+//    fmMainLogic.Hide;
+//    fmMainLogic.Show;
+//    edtStringFromUser.Clear;
   end;
   Inc(i);
 
@@ -698,7 +743,7 @@ begin
     lblRound.Caption := IntToStr(Round);
     memoStringOutput.Clear;
     memoStringOutput.Lines[0] := RandomString;
-
+    edtStringFromUser.Clear;
     UserString := '';
     fmMainLogic.Hide;
     fmMainLogic.Show;
@@ -728,7 +773,7 @@ begin
 
   RandomString := RandomizeString(MaxLength);
   memoStringOutput.Lines[0] := RandomString;
-
+  edtStringFromUser.Text := '';
   Inc(Round);
   lblRound.Caption := IntToStr(Round);
 end;

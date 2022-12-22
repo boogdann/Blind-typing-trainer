@@ -3202,12 +3202,30 @@ object fmMainLogic: TfmMainLogic
     OnKeyPress = edtStringFromUserKeyPress
   end
   object Button1: TButton
-    Left = 192
-    Top = 296
-    Width = 75
-    Height = 25
-    Caption = #1042#1099#1093#1086#1076
+    Left = 160
+    Top = 240
+    Width = 145
+    Height = 41
+    Caption = #1042#1099#1093#1086#1076' '#1085#1072' '#1088#1072#1073#1086#1095#1080#1081' '#1089#1090#1086#1083
     TabOrder = 2
     OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 160
+    Top = 287
+    Width = 145
+    Height = 41
+    Caption = #1042#1099#1093#1086#1076' '#1074' '#1075#1083#1072#1074#1085#1086#1077' '#1084#1077#1085#1102
+    TabOrder = 3
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 160
+    Top = 334
+    Width = 145
+    Height = 41
+    Caption = #1056#1077#1089#1090#1072#1088#1090
+    TabOrder = 4
+    OnClick = Button3Click
   end
 end

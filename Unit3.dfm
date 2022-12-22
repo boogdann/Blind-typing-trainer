@@ -3164,6 +3164,7 @@ object fmRules: TfmRules
     FF0000FFFF0000FFFF0000FFFF0000E1870000C0030000C0030000C0030000FF
     FF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000}
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel

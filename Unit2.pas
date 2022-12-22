@@ -11,9 +11,9 @@ type
     btnMainGame: TButton;
     Rules: TButton;
     dtnExit: TButton;
-    StatusBar1: TStatusBar;
     ToolBar1: TToolBar;
     Button1: TButton;
+    StatusBar1: TStatusBar;
     procedure btnMainGameClick(Sender: TObject);
     procedure RulesClick(Sender: TObject);
     procedure dtnExitClick(Sender: TObject);
