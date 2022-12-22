@@ -23,14 +23,24 @@ object fmMainMenu: TfmMainMenu
     TabOrder = 0
     OnClick = btnMainGameClick
   end
+<<<<<<< HEAD
   object Rules: TButton
+=======
+  object btnRules: TButton
+>>>>>>> cd7edae9f9e0bd6d15dcee190bc9d3a8dbe92e9c
     Left = 152
     Top = 224
     Width = 115
     Height = 41
+<<<<<<< HEAD
     Caption = #1055#1088#1072#1074#1080#1083#1072
     TabOrder = 1
     OnClick = RulesClick
+=======
+    Caption = 'btnRules'
+    TabOrder = 1
+    OnClick = btnRulesClick
+>>>>>>> cd7edae9f9e0bd6d15dcee190bc9d3a8dbe92e9c
   end
   object dtnExit: TButton
     Left = 152
@@ -47,6 +57,12 @@ object fmMainMenu: TfmMainMenu
     Width = 442
     Height = 19
     Panels = <>
+<<<<<<< HEAD
+=======
+    ExplicitLeft = 232
+    ExplicitTop = 232
+    ExplicitWidth = 0
+>>>>>>> cd7edae9f9e0bd6d15dcee190bc9d3a8dbe92e9c
   end
   object ToolBar1: TToolBar
     Left = 0

@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <BorlandProject>
 	<Transactions>
+<<<<<<< HEAD
     <Transaction>1899.12.30 00:00:00.000.374,=C:\Users\Lenovo\Desktop\что-то получилось\Unit4.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.409,C:\Users\Lenovo\Desktop\что-то получилось\Unit4.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.121,=C:\Users\Lenovo\Desktop\что-то получилось - Copy\Unit4.pas</Transaction>
@@ -12,5 +14,18 @@
     <Transaction>1899.12.30 00:00:00.000.655,=C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.952,=C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.440,=C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+=======
+    <Transaction>1899.12.30 00:00:00.000.952,=C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.591,=D:\БГУИР\опи\Blind typing trainer\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.531,=D:\БГУИР\опи\Blind typing trainer\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.373,C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\БГУИР\опи\Blind typing trainer\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.650,C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\БГУИР\опи\Blind typing trainer\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.373,C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\БГУИР\опи\Blind typing trainer\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.440,=C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.655,=C:\Users\Богдан\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+>>>>>>> cd7edae9f9e0bd6d15dcee190bc9d3a8dbe92e9c
   </Transactions>
 </BorlandProject>
+=======
+<BorlandProject/>
+>>>>>>> 14ded72fdda47eb49b09fa9a8d8a2f7d7915b94a

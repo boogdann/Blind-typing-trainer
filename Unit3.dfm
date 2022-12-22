@@ -3167,6 +3167,7 @@ object fmRules: TfmRules
   Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
+<<<<<<< HEAD
   object Label1: TLabel
     Left = 64
     Top = 32
@@ -3201,5 +3202,15 @@ object fmRules: TfmRules
     Caption = #1053#1072#1079#1072#1076
     TabOrder = 0
     OnClick = Button1Click
+=======
+  object backButton: TButton
+    Left = 416
+    Top = 208
+    Width = 75
+    Height = 25
+    Caption = #1047#1072#1082#1088#1099#1090#1100
+    TabOrder = 0
+    OnClick = backButtonClick
+>>>>>>> cd7edae9f9e0bd6d15dcee190bc9d3a8dbe92e9c
   end
 end

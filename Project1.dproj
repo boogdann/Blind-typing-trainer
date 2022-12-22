@@ -85,9 +85,12 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+<<<<<<< HEAD
         <Icon_MainIcon>Project1_Icon.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>..\glasses.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>..\glasses.png</UWP_DelphiLogo150>
+=======
+>>>>>>> cd7edae9f9e0bd6d15dcee190bc9d3a8dbe92e9c
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
